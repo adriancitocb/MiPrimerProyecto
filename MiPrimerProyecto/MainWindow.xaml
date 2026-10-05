@@ -1,0 +1,201 @@
+﻿<Window x:Class="MiPrimerProyecto.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MiPrimerProyecto"
+        mc:Ignorable="d"
+        Title="Portal de Videojuegos"
+        Height="600"
+        Width="800">
+
+    <Grid>
+
+        <!-- FILAS PRINCIPALES -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- CABECERA -->
+        <Border Grid.Row="0"
+                BorderBrush="Black"
+                BorderThickness="1">
+
+            <!-- TARJETA MI PERFIL -->
+            <Border HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Width="120"
+                    Height="35"
+                    Margin="0,0,15,0"
+                    Background="#1687D9"
+                    BorderBrush="#0B5FA5"
+                    BorderThickness="1"
+                    CornerRadius="8">
+
+                <TextBlock Text="Mi perfil"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+
+            </Border>
+
+        </Border>
+
+
+        <!-- MENU SUPERIOR -->
+        <Border Grid.Row="1"
+                BorderBrush="Black"
+                BorderThickness="1">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+
+                <Button Content="TIENDA"
+                        Margin="10,0"/>
+
+                <Button Content="COMUNIDAD"
+                        Margin="10,0"/>
+
+                <Button Content="SOPORTE"
+                        Margin="10,0"/>
+
+            </StackPanel>
+
+        </Border>
+
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <!-- MENU LATERAL -->
+            <Border Grid.Column="0"
+                    BorderBrush="Black"
+                    BorderThickness="1"
+                    CornerRadius="15"
+                    Margin="15">
+
+                <StackPanel VerticalAlignment="Center">
+
+                    <Button Content="Destacados"
+                            Margin="10"/>
+
+                    <Button Content="Mis juegos"
+                            Margin="10"/>
+
+                    <Button Content="Configuración"
+                            Margin="10"/>
+
+                </StackPanel>
+
+            </Border>
+
+
+            <!-- ZONA DE JUEGOS -->
+            <!-- ZONA DE JUEGOS -->
+            <Border Grid.Column="1"
+        BorderBrush="Black"
+        BorderThickness="1"
+        CornerRadius="15"
+        Margin="15">
+
+                <Grid>
+
+                    <!-- TRES FILAS -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!-- PRIMERA FILA -->
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                        <Button Content="EA SPORTS FC 26"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="Minecraft"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="GTA V"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                    </StackPanel>
+
+
+                    <!-- SEGUNDA FILA -->
+                    <StackPanel Grid.Row="1"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                        <Button Content="Red Dead Redemption 2"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="Call of Duty"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="Fortnite"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                    </StackPanel>
+
+
+                    <!-- TERCERA FILA -->
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                        <Button Content="Cyberpunk 2077"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="The Witcher 3"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                        <Button Content="Forza Horizon 5"
+                                Width="110"
+                                Height="70"
+                                Margin="10"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Window>
