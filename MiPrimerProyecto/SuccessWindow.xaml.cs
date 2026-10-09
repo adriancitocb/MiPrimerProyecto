@@ -3,14 +3,15 @@ using System.Windows;
 
 namespace MiPrimerProyecto
 {
-    public partial class MainWindow : Window
+    public partial class SuccessWindow : Window
     {
-        public MainWindow()
+        public SuccessWindow(string usuario)
         {
             InitializeComponent();
+
+            txtBienvenida.Text = "Has iniciado sesión como: " + usuario;
         }
 
-        // Botón para cerrar sesión y volver al login
         private void BtnCerrarSesion_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow login = new LoginWindow();

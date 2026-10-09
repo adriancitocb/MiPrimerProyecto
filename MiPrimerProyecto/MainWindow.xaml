@@ -9,12 +9,10 @@
         Height="600"
         Width="800">
 
-    <!-- ESTILOS -->
     <Window.Resources>
 
         <!-- BOTONES DEL MENU -->
         <Style x:Key="MenuButton" TargetType="Button">
-
             <Setter Property="Background" Value="#7C3AED"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -25,22 +23,15 @@
             <Setter Property="Margin" Value="8,0"/>
 
             <Style.Triggers>
-
                 <Trigger Property="IsMouseOver" Value="True">
-
                     <Setter Property="Background" Value="#9F67FF"/>
                     <Setter Property="BorderBrush" Value="#D8B4FE"/>
-
                 </Trigger>
-
             </Style.Triggers>
-
         </Style>
-
 
         <!-- BOTONES DE JUEGOS -->
         <Style x:Key="GameButton" TargetType="Button">
-
             <Setter Property="Background" Value="#263B73"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -51,22 +42,15 @@
             <Setter Property="Margin" Value="6"/>
 
             <Style.Triggers>
-
                 <Trigger Property="IsMouseOver" Value="True">
-
                     <Setter Property="Background" Value="#1687D9"/>
                     <Setter Property="BorderBrush" Value="#7DD3FC"/>
-
                 </Trigger>
-
             </Style.Triggers>
-
         </Style>
-
 
         <!-- BOTONES LATERALES -->
         <Style x:Key="SideButton" TargetType="Button">
-
             <Setter Property="Background" Value="#263B73"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -76,57 +60,33 @@
             <Setter Property="Margin" Value="10,5"/>
 
             <Style.Triggers>
-
                 <Trigger Property="IsMouseOver" Value="True">
-
                     <Setter Property="Background" Value="#7C3AED"/>
                     <Setter Property="BorderBrush" Value="#C4B5FD"/>
-
                 </Trigger>
-
             </Style.Triggers>
-
         </Style>
 
     </Window.Resources>
 
-
     <!-- FONDO GENERAL -->
-
     <Grid>
-
         <Grid.Background>
-
-            <LinearGradientBrush StartPoint="0,0"
-                                 EndPoint="1,1">
-
-                <GradientStop Color="#101A35"
-                              Offset="0"/>
-
-                <GradientStop Color="#25134F"
-                              Offset="0.5"/>
-
-                <GradientStop Color="#064E7A"
-                              Offset="1"/>
-
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#101A35" Offset="0"/>
+                <GradientStop Color="#25134F" Offset="0.5"/>
+                <GradientStop Color="#064E7A" Offset="1"/>
             </LinearGradientBrush>
-
         </Grid.Background>
 
-
         <!-- FILAS PRINCIPALES -->
-
         <Grid.RowDefinitions>
-
             <RowDefinition Height="70"/>
             <RowDefinition Height="55"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
 
-
-        <!-- ================= CABECERA ================= -->
-
+        <!-- CABECERA -->
         <Border Grid.Row="0"
                 Background="#101A35"
                 BorderBrush="#7C3AED"
@@ -134,9 +94,7 @@
 
             <Grid>
 
-
                 <!-- LOGO -->
-
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Center"
                             Margin="20,0,0,0">
@@ -146,7 +104,6 @@
                                Margin="0,0,8,0"/>
 
                     <StackPanel>
-
                         <TextBlock Text="GAMESTATION"
                                    Foreground="White"
                                    FontSize="23"
@@ -156,39 +113,45 @@
                                    Foreground="#A78BFA"
                                    FontSize="9"
                                    FontWeight="Bold"/>
-
                     </StackPanel>
-
                 </StackPanel>
 
+                <!-- PERFIL Y CERRAR SESIÓN -->
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            Margin="0,0,15,0">
 
-                <!-- PERFIL -->
+                    <Border Width="125"
+                            Height="38"
+                            Background="#7C3AED"
+                            BorderBrush="#C4B5FD"
+                            BorderThickness="1"
+                            CornerRadius="10"
+                            Margin="0,0,10,0">
 
-                <Border HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        Width="125"
-                        Height="38"
-                        Margin="0,0,15,0"
-                        Background="#7C3AED"
-                        BorderBrush="#C4B5FD"
-                        BorderThickness="1"
-                        CornerRadius="10">
+                        <TextBlock Text="👤  Mi perfil"
+                                   Foreground="White"
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
 
-                    <TextBlock Text="👤  Mi perfil"
-                               Foreground="White"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-
-                </Border>
+                    <Button Content="Cerrar sesión"
+                            Height="38"
+                            Padding="10,0"
+                            Background="#263B73"
+                            Foreground="White"
+                            BorderBrush="#4DA9FF"
+                            FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="BtnCerrarSesion_Click"/>
+                </StackPanel>
 
             </Grid>
-
         </Border>
 
-
-        <!-- ================= MENU SUPERIOR ================= -->
-
+        <!-- MENU SUPERIOR -->
         <Border Grid.Row="1"
                 Background="#172554"
                 BorderBrush="#2563EB"
@@ -207,28 +170,18 @@
 
                 <Button Content="SOPORTE"
                         Style="{StaticResource MenuButton}"/>
-
             </StackPanel>
-
         </Border>
 
-
-        <!-- ================= CONTENIDO ================= -->
-
-        <Grid Grid.Row="2"
-              Margin="10">
-
+        <!-- CONTENIDO -->
+        <Grid Grid.Row="2" Margin="10">
 
             <Grid.ColumnDefinitions>
-
                 <ColumnDefinition Width="180"/>
                 <ColumnDefinition Width="*"/>
-
             </Grid.ColumnDefinitions>
 
-
-            <!-- ================= MENU LATERAL ================= -->
-
+            <!-- MENU LATERAL -->
             <Border Grid.Column="0"
                     Background="#111C3D"
                     BorderBrush="#7C3AED"
@@ -238,14 +191,12 @@
 
                 <StackPanel VerticalAlignment="Center">
 
-
                     <TextBlock Text="MENÚ PRINCIPAL"
                                Foreground="#C4B5FD"
                                FontSize="13"
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                Margin="0,0,0,15"/>
-
 
                     <Button Content="⭐  Destacados"
                             Style="{StaticResource SideButton}"/>
@@ -256,13 +207,9 @@
                     <Button Content="⚙  Configuración"
                             Style="{StaticResource SideButton}"/>
 
-
-                    <!-- SEPARADOR -->
-
                     <Border Height="1"
                             Background="#334155"
                             Margin="15,18"/>
-
 
                     <TextBlock Text="🔥 MÁS POPULARES"
                                Foreground="#38BDF8"
@@ -275,14 +222,10 @@
                                FontSize="10"
                                HorizontalAlignment="Center"
                                Margin="0,5"/>
-
                 </StackPanel>
-
             </Border>
 
-
-            <!-- ================= ZONA DE JUEGOS ================= -->
-
+            <!-- ZONA DE JUEGOS -->
             <Border Grid.Column="1"
                     Background="#111C3D"
                     BorderBrush="#7C3AED"
@@ -291,22 +234,15 @@
                     Margin="5">
 
                 <Grid>
-
-
                     <Grid.RowDefinitions>
-
                         <RowDefinition Height="60"/>
                         <RowDefinition Height="*"/>
-
                     </Grid.RowDefinitions>
 
-
                     <!-- TITULO -->
-
                     <Grid Grid.Row="0">
 
                         <StackPanel Margin="20,8">
-
                             <TextBlock Text="🎮  JUEGOS DESTACADOS"
                                        Foreground="White"
                                        FontSize="18"
@@ -315,11 +251,7 @@
                             <TextBlock Text="Los títulos más populares de nuestra comunidad"
                                        Foreground="#94A3B8"
                                        FontSize="10"/>
-
                         </StackPanel>
-
-
-                        <!-- ETIQUETA -->
 
                         <Border HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
@@ -332,29 +264,19 @@
                                        Foreground="White"
                                        FontSize="10"
                                        FontWeight="Bold"/>
-
                         </Border>
-
                     </Grid>
 
-
                     <!-- JUEGOS -->
-
-                    <Grid Grid.Row="1"
-                          Margin="5">
-
+                    <Grid Grid.Row="1" Margin="5">
 
                         <Grid.RowDefinitions>
-
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-
                         </Grid.RowDefinitions>
 
-
                         <!-- FILA 1 -->
-
                         <StackPanel Grid.Row="0"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center"
@@ -368,12 +290,9 @@
 
                             <Button Content="GTA V"
                                     Style="{StaticResource GameButton}"/>
-
                         </StackPanel>
 
-
                         <!-- FILA 2 -->
-
                         <StackPanel Grid.Row="1"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center"
@@ -387,12 +306,9 @@
 
                             <Button Content="Fortnite"
                                     Style="{StaticResource GameButton}"/>
-
                         </StackPanel>
 
-
                         <!-- FILA 3 -->
-
                         <StackPanel Grid.Row="2"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center"
@@ -406,18 +322,11 @@
 
                             <Button Content="Forza Horizon 5"
                                     Style="{StaticResource GameButton}"/>
-
                         </StackPanel>
 
-
                     </Grid>
-
                 </Grid>
-
             </Border>
-
         </Grid>
-
     </Grid>
-
 </Window>
