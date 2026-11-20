@@ -2,30 +2,19 @@
 using System;
 using System.Windows;
 using System.Windows.Threading;
+using MySql.Data.MySqlClient;
 
 namespace MiPrimerProyecto
 {
     public partial class LoginWindow : Window
     {
-        // Usuarios y contraseñas almacenados en memoria
-        private string[,] usuarios =
-        {
-            { "admin", "GameStation123" },
-            { "adrian", "GameStation456" },
-            { "invitado", "Invitado123" }
-        };
-
-        // Contador de contraseñas incorrectas
         private int intentosFallidos = 0;
-
-        // Temporizador del bloqueo
         private DispatcherTimer temporizadorBloqueo;
 
         public LoginWindow()
         {
             InitializeComponent();
 
-            // Configurar el temporizador de 30 segundos
             temporizadorBloqueo = new DispatcherTimer();
             temporizadorBloqueo.Interval = TimeSpan.FromSeconds(30);
             temporizadorBloqueo.Tick += TemporizadorBloqueo_Tick;
@@ -36,7 +25,6 @@ namespace MiPrimerProyecto
             string usuario = txtUsuario.Text.Trim();
             string contrasena = txtContrasena.Password;
 
-            // 1. Comprobar que los campos no estén vacíos
             if (string.IsNullOrWhiteSpace(usuario) ||
                 string.IsNullOrWhiteSpace(contrasena))
             {
@@ -44,74 +32,95 @@ namespace MiPrimerProyecto
                 return;
             }
 
-            // 2. Buscar si el usuario existe
-            bool usuarioExiste = false;
-
-            for (int i = 0; i < usuarios.GetLength(0); i++)
+            try
             {
-                if (usuario == usuarios[i, 0])
+                using (MySqlConnection conexion =
+                    new DatabaseHelper().GetConnection())
                 {
-                    usuarioExiste = true;
+                    conexion.Open();
 
-                    // Comprobar si la contraseña es correcta
-                    if (contrasena == usuarios[i, 1])
+                    string consulta =
+                        "SELECT password FROM Usuarios " +
+                        "WHERE nombre_usuario = @usuario";
+
+                    using (MySqlCommand comando =
+                        new MySqlCommand(consulta, conexion))
                     {
-                        txtMensaje.Text = "";
+                        comando.Parameters.AddWithValue("@usuario", usuario);
 
-                        // Abrir el catálogo de videojuegos
-                        MainWindow ventana = new MainWindow();
-                        ventana.Show();
+                        object resultado = comando.ExecuteScalar();
 
-                        // Cerrar el login
-                        this.Close();
-                        return;
+                        if (resultado == null)
+                        {
+                            txtMensaje.Text =
+                                "El usuario introducido no existe.";
+                            txtContrasena.Clear();
+                            txtContrasena.Focus();
+                            return;
+                        }
+
+                        string passwordGuardada = resultado.ToString();
+
+                        if (contrasena == passwordGuardada)
+                        {
+                            intentosFallidos = 0;
+                            txtMensaje.Text = "";
+
+                            // Enviar el nombre del usuario al catálogo
+                            MainWindow ventana = new MainWindow(usuario);
+                            ventana.Show();
+
+                            this.Close();
+                            return;
+                        }
                     }
-
-                    break;
                 }
-            }
 
-            // 3. Mostrar el error correspondiente
-            if (!usuarioExiste)
-            {
-                txtMensaje.Text = "El usuario introducido no existe.";
+                intentosFallidos++;
+
+                if (intentosFallidos >= 3)
+                {
+                    txtMensaje.Text =
+                        "Has superado los 3 intentos. Cuenta bloqueada temporalmente.";
+
+                    btnLogin.IsEnabled = false;
+                    temporizadorBloqueo.Start();
+                    return;
+                }
+
+                txtMensaje.Text =
+                    "La contraseña introducida no es correcta.";
+
                 txtContrasena.Clear();
                 txtContrasena.Focus();
-                return;
             }
-
-            // 4. Contar los intentos con contraseña incorrecta
-            intentosFallidos++;
-
-            if (intentosFallidos >= 3)
+            catch (MySqlException)
             {
                 txtMensaje.Text =
-                    "Has superado los 3 intentos. Cuenta bloqueada temporalmente.";
-
-                btnLogin.IsEnabled = false;
-
-                // Iniciar el bloqueo temporal
-                temporizadorBloqueo.Start();
-                return;
+                    "No se pudo conectar con la base de datos. Comprueba que MySQL esté iniciado.";
             }
+            catch (Exception)
+            {
+                txtMensaje.Text =
+                    "Se ha producido un error inesperado al iniciar sesión.";
+            }
+        }
 
-            txtMensaje.Text = "La contraseña introducida no es correcta.";
-            txtContrasena.Clear();
-            txtContrasena.Focus();
+        private void BtnNuevoUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            RegistroWindow registro = new RegistroWindow();
+            registro.ShowDialog();
         }
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
         {
-            // Cerrar toda la aplicación
             Application.Current.Shutdown();
         }
 
         private void TemporizadorBloqueo_Tick(object sender, EventArgs e)
         {
-            // Detener el temporizador
             temporizadorBloqueo.Stop();
 
-            // Reiniciar el contador y permitir nuevos intentos
             intentosFallidos = 0;
             btnLogin.IsEnabled = true;
 

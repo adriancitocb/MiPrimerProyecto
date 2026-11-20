@@ -5,9 +5,11 @@ namespace MiPrimerProyecto
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string nombreUsuario)
         {
             InitializeComponent();
+
+            txtNombreUsuario.Text = "👤  " + nombreUsuario;
         }
 
         // Botón para cerrar sesión y volver al login
